@@ -131,6 +131,16 @@ class Attachment extends AbstractExtensibleModel implements AttachmentInterface,
     /**
      * @return int
      */
+    public function getId() : ?int
+    {
+        $id = $this->getData(self::ID);
+        
+        return $id == null ? $id : (int) $id;
+    }
+
+    /**
+     * @return int
+     */
     public function getProductId() : int
     {
         return (int) $this->getData(self::PRODUCT_ID);

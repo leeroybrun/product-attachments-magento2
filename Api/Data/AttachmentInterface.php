@@ -24,6 +24,19 @@ interface AttachmentInterface extends ExtensibleDataInterface
     /**
      * @return int
      */
+    public function getId() : ?int;
+
+    /**
+     * 
+     *
+     * @param int $id
+     * @return $this
+     */
+    public function setId($id);
+
+    /**
+     * @return int
+     */
     public function getProductId() : int;
 
 

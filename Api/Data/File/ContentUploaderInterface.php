@@ -12,6 +12,7 @@ declare(strict_types = 1);
 namespace LizardMedia\ProductAttachment\Api\Data\File;
 
 use \Magento\Downloadable\Api\Data\File\ContentInterface;
+use \Magento\Catalog\Api\Data\ProductInterface;
 
 /**
  * Interface ContentUploaderInterface
@@ -27,5 +28,5 @@ interface ContentUploaderInterface
      *
      * @return array
      */
-    public function upload(ContentInterface $fileContent, string $contentType) : array;
+    public function upload(ContentInterface $fileContent, string $contentType, ProductInterface $product) : array;
 }

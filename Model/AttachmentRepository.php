@@ -354,7 +354,7 @@ class AttachmentRepository implements AttachmentRepositoryInterface
             && $attachment->getAttachmentFile() === null) {
             $attachmentData[Download::LINK_TYPE_FILE] = $this->jsonSeliarizer->serialize(
                 [
-                    $this->fileContentUploader->upload($attachment->getAttachmentFileContent(), 'attachment'),
+                    $this->fileContentUploader->upload($attachment->getAttachmentFileContent(), 'attachment', $product),
                 ]
             );
         } elseif ($attachment->getAttachmentType() === Download::LINK_TYPE_URL) {

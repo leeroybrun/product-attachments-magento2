@@ -20,6 +20,7 @@ use \Magento\MediaStorage\Model\File\Validator\NotProtectedExtension;
 use \Magento\MediaStorage\Model\File\Uploader;
 use \Magento\Framework\App\Filesystem\DirectoryList;
 use \Magento\Framework\Filesystem;
+use \Magento\Catalog\Api\Data\ProductInterface;
 
 /**
  * Class ContentUploader
@@ -92,7 +93,7 @@ class ContentUploader extends Uploader implements ContentUploaderInterface
      *
      * @return array
      */
-    public function upload(ContentInterface $fileContent, string $contentType) : array
+    public function upload(ContentInterface $fileContent, string $contentType, ProductInterface $product) : array
     {
         $this->_file = $this->decodeContent($fileContent);
 
@@ -102,12 +103,15 @@ class ContentUploader extends Uploader implements ContentUploaderInterface
 
         $this->_fileExists = true;
         $this->_uploadType = self::SINGLE_STYLE;
-        $this->setAllowRenameFiles(true);
-        $this->setFilesDispersion(true);
-        $result = $this->save($this->getDestinationDirectory($contentType));
+        $this->setAllowRenameFiles(false);
+        $this->setAllowCreateFolders(true);
+        $this->setFilesDispersion(false);
+        $result = $this->save($this->getDestinationDirectory($contentType) .DIRECTORY_SEPARATOR. $product->getSku() .DIRECTORY_SEPARATOR);
+
         unset($result['path']);
         $result['status'] = 'new';
         $result['name'] = substr($result['file'], strrpos($result['file'], DIRECTORY_SEPARATOR) + 1);
+        $result['file'] = $product->getSku() .DIRECTORY_SEPARATOR. $result['file'];
         return $result;
     }
 

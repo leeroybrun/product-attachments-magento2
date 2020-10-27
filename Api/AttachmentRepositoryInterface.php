@@ -56,4 +56,63 @@ interface AttachmentRepositoryInterface
      * @return bool
      */
     public function delete(int $id) : bool;
+
+    /**
+     * Create new gallery entry
+     *
+     * @param string $sku
+     * @param AttachmentInterface $attachment
+     * @return AttachmentInterface
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function createForSku(
+        $sku,
+        AttachmentInterface $attachment
+    );
+
+    /**
+     * Update gallery entry
+     *
+     * @param string $sku
+     * @param AttachmentInterface $attachment
+     * @return AttachmentInterface
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function updateForSku(
+        $sku,
+        $entryId,
+        AttachmentInterface $attachment
+    );
+
+    /**
+     * Remove gallery entry
+     *
+     * @param string $sku
+     * @param int $entryId
+     * @return bool
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @throws \Magento\Framework\Exception\StateException
+     */
+    public function removeForSku($sku, $entryId);
+
+    /**
+     * Return information about gallery entry
+     *
+     * @param string $sku
+     * @param int $entryId
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return AttachmentInterface
+     */
+    public function getForSku($sku, $entryId);
+
+    /**
+     * Retrieve the list of gallery entries associated with given product
+     *
+     * @param string $sku
+     * @return AttachmentInterface[]
+     */
+    public function getListForSku($sku);
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+
+    <route url="/V1/products/:sku/attachment/:entryId" method="GET">
+        <service class="LizardMedia\ProductAttachment\Api\AttachmentRepositoryInterface" method="getForSku"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+    <route url="/V1/products/:sku/attachment" method="POST">
+        <service class="LizardMedia\ProductAttachment\Api\AttachmentRepositoryInterface" method="createForSku"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+    <route url="/V1/products/:sku/attachment/:entryId" method="PUT">
+        <service class="LizardMedia\ProductAttachment\Api\AttachmentRepositoryInterface" method="updateForSku"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+    <route url="/V1/products/:sku/attachment/:entryId" method="DELETE">
+        <service class="LizardMedia\ProductAttachment\Api\AttachmentRepositoryInterface" method="removeForSku"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+    <route url="/V1/products/:sku/attachment" method="GET">
+        <service class="LizardMedia\ProductAttachment\Api\AttachmentRepositoryInterface" method="getListForSku"/>
+        <resources>
+            <resource ref="Magento_Catalog::catalog"/>
+        </resources>
+    </route>
+</routes>

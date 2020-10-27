@@ -465,4 +465,49 @@ class AttachmentRepository implements AttachmentRepositoryInterface
 
         return true;
     }
+
+    /**
+     * @inheritdoc
+     */
+    public function createForSku(
+        $sku,
+        AttachmentInterface $attachment
+    ) {
+        $attachment->setId(null);
+        return $this->save($sku, $attachment, true);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function updateForSku(
+        $sku,
+        $entryId,
+        AttachmentInterface $attachment
+    ) {
+        $attachment->setId((int)$entryId);
+        return $this->save($sku, $attachment, true);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function removeForSku($sku, $entryId) {
+        return $this->delete((int) $entryId);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getForSku($sku, $entryId) {
+        return $this->getById($entryId);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getListForSku($sku) {
+        $product = $this->productRepository->get($sku, true);
+        return $this->getAttachmentsByProduct($product);
+    }
 }

@@ -227,7 +227,7 @@ class AttachmentRepository implements AttachmentRepositoryInterface
      */
     private function getAttachments(ProductInterface $product) : ?Collection
     {
-        if ($product->getProductAttachments() === null) {
+        if ($product->getProductAttachments() === null || !is_a($product->getProductAttachments(),'LizardMedia\ProductAttachment\Model\ResourceModel\Attachment\Collection')) {
             $attachmentCollection = $this->attachmentCollectionFactory->create()
                 ->addProductToFilter([$product->getEntityId()])
                 ->addTitleToResult((int) $product->getStoreId());
